@@ -1,0 +1,30 @@
+{
+  "title": "<rank_type> 랭킹",
+
+  "colorFirst": "&a",
+  "colorSecond": "&6",
+  "colorThird": "&e",
+
+  "hatItem": {
+    "type": "stone",
+    "displayName": " ",
+    "lore": [
+      "로어"
+    ],
+    "amount": 1,
+    "customModelData": 0
+  },
+
+  "playerItem": {
+    "type": "book",
+    "displayName": "<rank>위",
+    "lore": [
+      "&f닉네임 : <nickname>",
+      "&f일일 포인트 : <daily_point>",
+      "&f누적 포인트 : <weekly_point>",
+      "&f순위 : <rank>"
+    ],
+    "amount": 1,
+    "customModelData": 0
+  }
+}

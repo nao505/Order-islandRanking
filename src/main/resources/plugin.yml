@@ -1,0 +1,12 @@
+name: Ap_ranking
+version: '${version}'
+main: com.binggre.ap_ranking.ApRanking
+api-version: '1.20'
+depend:
+  - del_isLandRanking
+  - BinggreAPI
+  - Citizens
+commands:
+  랭킹관리:
+    permission: apranking.admin
+  섬랭킹:

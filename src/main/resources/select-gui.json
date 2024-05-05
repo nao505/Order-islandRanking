@@ -1,0 +1,24 @@
+{
+  "title": "포인트 랭킹",
+  "size": 3,
+
+  "daily": {
+    "type": "book",
+    "displayName": "&a일일 랭킹",
+    "lore": [
+      "&7클릭 시 일일 랭킹을 확인합니다."
+    ],
+    "amount": 1,
+    "customModelData": 0
+  },
+
+  "weekly": {
+    "type": "book",
+    "displayName": "&6주간 랭킹",
+    "lore": [
+      "&7클릭 시 주간 랭킹을 확인합니다."
+    ],
+    "amount": 1,
+    "customModelData": 0
+  }
+}
