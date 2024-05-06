@@ -2,19 +2,27 @@ package com.binggre.ap_ranking.utils;
 
 import com.binggre.ap_ranking.objects.RankType;
 import com.racoboss.Class.playerPointClass;
-import com.racoboss.Function.Function;
 import org.bukkit.entity.Player;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.lang.reflect.Field;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RankingFinder {
 
+    private static Map<UUID, playerPointClass> getMap() {
+        try {
+            Class<?> functionClass = Class.forName("com.racoboss.Function.Function");
+            Field isLandRankingData = functionClass.getField("isLandRankingData");
+            return (Map<UUID, playerPointClass>) isLandRankingData.get(functionClass);
+        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static List<playerPointClass> findRanking(RankType rankType) {
-        Collection<playerPointClass> values = Function.isLandRankingData.values();
+        Collection<playerPointClass> values = getMap().values();
         return switch (rankType) {
             case DAILY -> values.stream()
                     .sorted(Comparator.comparing(playerPointClass::getPoint_daily).reversed())

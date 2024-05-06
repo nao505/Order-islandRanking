@@ -10,7 +10,7 @@ import com.binggre.ap_ranking.listeners.InventoryListener;
 import com.binggre.ap_ranking.listeners.RewardInventoryListener;
 import com.binggre.ap_ranking.objects.OfflinePlayerRewardHolder;
 import com.binggre.ap_ranking.objects.RankingRewardHolder;
-import com.binggre.ap_ranking.schedulers.NpcUpdateScheduler;
+import com.binggre.ap_ranking.schedulers.RankingUpdateScheduler;
 import com.binggre.ap_ranking.schedulers.RestScheduler;
 import com.binggre.binggreapi.BinggrePlugin;
 
@@ -33,8 +33,10 @@ public final class ApRanking extends BinggrePlugin {
         saveResource("config.json", false);
 
         super.registerObjectHolder(RankingRewardHolder.getInst());
+        super.registerObjectHolder(OfflinePlayerRewardHolder.getInst());
         super.executorCommand(this, new AdminCommand("랭킹관리"));
         super.executorCommand(this, new UserCommand("섬랭킹"));
+
         super.registerEvents(this,
                 new RewardInventoryListener(),
                 new InventoryListener(),
@@ -43,13 +45,14 @@ public final class ApRanking extends BinggrePlugin {
         ApRankingConfig.getInst().load();
         RankingSelectGUI.getInst().load();
         RankingGUI.getInst().load();
-        OfflinePlayerRewardHolder.getInst().load();
 
         new RestScheduler().runTaskTimer(this, 5L, 5L);
-        new NpcUpdateScheduler().runTaskTimer(this, 0, 6000);
+        new RankingUpdateScheduler().runTaskTimer(this, 0, 6000);
     }
 
     @Override
     public void onDisable() {
+        super.unregisterObjectHolder(RankingRewardHolder.getInst());
+        super.unregisterObjectHolder(OfflinePlayerRewardHolder.getInst());
     }
 }

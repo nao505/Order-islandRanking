@@ -1,4 +1,5 @@
 {
   "resetDay": "SUNDAY",
-  "resetTime": "13"
+  "resetTime": "13",
+  "rankingHologram": "<rank>위 <island>섬 <point>"
 }

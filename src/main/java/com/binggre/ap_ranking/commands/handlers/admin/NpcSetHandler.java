@@ -2,7 +2,6 @@ package com.binggre.ap_ranking.commands.handlers.admin;
 
 import com.binggre.ap_ranking.config.ApRankingConfig;
 import com.binggre.ap_ranking.objects.RankType;
-import com.binggre.ap_ranking.objects.RankingNPC;
 import com.binggre.binggreapi.command.CommandHandler;
 import com.binggre.binggreapi.command.SimpleCommandExecutor;
 import com.binggre.binggreapi.utils.NumberUtil;
@@ -11,9 +10,6 @@ import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-import java.util.Map;
 
 public class NpcSetHandler extends CommandHandler {
 
@@ -58,6 +54,6 @@ public class NpcSetHandler extends CommandHandler {
         config.save();
 
         sender.sendMessage(String.format("%s %s순위의 NPC를 %s으(로) 설정했습니다.", type.getName(), rank, npcId));
-        return false;
+        return true;
     }
 }

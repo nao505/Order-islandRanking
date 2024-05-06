@@ -8,14 +8,16 @@ import com.binggre.binggreapi.objects.items.CustomItemStack;
 import com.binggre.binggreapi.utils.ColorManager;
 import com.binggre.binggreapi.utils.ItemManager;
 import com.binggre.binggreapi.utils.file.FileManager;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.racoboss.Class.playerPointClass;
-import com.racoboss.CustomNickName.CustomNickNameFunction;
-import com.racoboss.Function;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -139,16 +141,21 @@ public class RankingGUI {
             String nickname;
             Player player = Bukkit.getPlayer(playerUUID);
             if (player == null) {
-                nickname = Bukkit.getOfflinePlayer(playerUUID).getName();
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerUUID);
+                nickname = offlinePlayer.getName();
+                updatePlayerHead(offlinePlayer, itemStack);
             } else {
                 nickname = player.getName();
+                updatePlayerHead(player, itemStack);
             }
+
             String rankColor = getRankColor(rank) + rank;
             ItemManager.replaceDisplayName(itemStack, "<nickname>", nickname);
             ItemManager.replaceDisplayName(itemStack, "<rank>", rankColor);
             ItemManager.replaceLore(itemStack, "<daily_point>", playerPoint.getPoint_daily() + "");
             ItemManager.replaceLore(itemStack, "<weekly_point>", playerPoint.getPoint_accumulated() + "");
             ItemManager.replaceLore(itemStack, "<rank>", rankColor);
+
             return ItemManager.replaceLore(itemStack, "<nickname>", nickname);
         }
 
@@ -159,6 +166,18 @@ public class RankingGUI {
                 case 3 -> instance.colorThird;
                 default -> "§f";
             };
+        }
+
+
+        public void updatePlayerHead(OfflinePlayer player, ItemStack itemStack) {
+            if (itemStack.getType() != Material.PLAYER_HEAD) {
+                return;
+            }
+            SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
+            PlayerProfile profile = player.getPlayerProfile();
+            skullMeta.setPlayerProfile(profile);
+            skullMeta.setOwningPlayer(player);
+            itemStack.setItemMeta(skullMeta);
         }
     }
 }

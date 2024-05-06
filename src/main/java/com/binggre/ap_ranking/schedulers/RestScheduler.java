@@ -10,7 +10,6 @@ import com.binggre.ap_ranking.utils.RewardReceiver;
 import com.racoboss.Class.playerPointClass;
 import org.bukkit.Bukkit;
 
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.*;
@@ -22,7 +21,6 @@ public class RestScheduler extends SchedulerService {
         if (!enable) {
             return;
         }
-        resetAndRewardReceive();
         ApRankingConfig config = ApRankingConfig.getInst();
         LocalDateTime now = LocalDateTime.now();
         int resetTime = config.getResetTime();
