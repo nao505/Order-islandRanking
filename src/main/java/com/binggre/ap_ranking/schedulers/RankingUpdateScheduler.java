@@ -1,5 +1,6 @@
 package com.binggre.ap_ranking.schedulers;
 
+import com.binggre.ap_ranking.ApRanking;
 import com.binggre.ap_ranking.config.ApRankingConfig;
 import com.binggre.ap_ranking.objects.RankType;
 import com.binggre.ap_ranking.utils.RankingFinder;
@@ -18,6 +19,7 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.BiConsumer;
 
 public class RankingUpdateScheduler extends SchedulerService {
 
@@ -31,26 +33,29 @@ public class RankingUpdateScheduler extends SchedulerService {
 
     private void updateHologram() {
         ApRankingConfig config = ApRankingConfig.getInst();
-        List<playerPointClass> rankings = RankingFinder.findRanking(RankType.WEEKLY);
+        updateHologram(config, RankType.WEEKLY);
+        updateHologram(config, RankType.DAILY);
+    }
 
-        config.getRankHolograms().forEach((rankType, hologramId) -> {
-            Hologram hologram = Hologram.getCachedHologram(hologramId);
-            if (hologram == null) {
-                return;
-            }
-            DList<HologramPage> pages = hologram.getPages();
-            List<HologramLine> lines = pages.get(0).getLines();
+    private void updateHologram(ApRankingConfig config, RankType rankType) {
+        List<playerPointClass> rankings = RankingFinder.findRanking(rankType);
+        String hologramId = config.getHologramId(rankType);
+        Hologram hologram = Hologram.getCachedHologram(hologramId);
+        if (hologram == null) {
+            return;
+        }
+        DList<HologramPage> pages = hologram.getPages();
+        List<HologramLine> lines = pages.get(0).getLines();
 
-            int maxSize = lines.size();
-            int rank = 0;
-            for (playerPointClass ranker : rankings) {
-                if (rank >= maxSize) {
-                    break;
-                }
-                lines.get(rank).setContent(config.getHologramContent(rankType, (rank + 1), ranker));
-                rank++;
+        int maxSize = lines.size();
+        int rank = 0;
+        for (playerPointClass ranker : rankings) {
+            if (rank >= maxSize) {
+                break;
             }
-        });
+            lines.get(rank).setContent(config.getHologramContent(rankType, (rank + 1), ranker));
+            rank++;
+        }
     }
 
     private void updateNPC() {

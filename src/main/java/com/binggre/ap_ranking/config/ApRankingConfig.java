@@ -12,6 +12,7 @@ import com.racoboss.Class.playerPointClass;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ApRankingConfig {
@@ -64,6 +65,10 @@ public class ApRankingConfig {
 
     public Map<RankType, Map<Integer, Integer>> getRankNPCs() {
         return rankNPCs;
+    }
+
+    public String getHologramId(RankType rankType) {
+        return rankHolograms.get(rankType);
     }
 
     public Map<RankType, String> getRankHolograms() {

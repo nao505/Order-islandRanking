@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class RankingGUI {
@@ -56,7 +57,8 @@ public class RankingGUI {
     private String colorSecond;
     private String colorThird;
 
-    private CustomItemStack hatItem;
+    // rank, item
+    private Map<Integer, CustomItemStack> hatItems;
     private CustomItemStack playerItem;
 
     public void load() {
@@ -66,7 +68,7 @@ public class RankingGUI {
         instance.colorSecond = ColorManager.format(instance.colorSecond);
         instance.colorThird = ColorManager.format(instance.colorThird);
         instance.playerItem.update();
-        instance.hatItem.update();
+        instance.hatItems.values().forEach(CustomItemStack::update);
     }
 
     public void open(Player player, RankType type) {
@@ -116,15 +118,15 @@ public class RankingGUI {
                 }
                 switch (index) {
                     case 0 -> {
-                        inventory.setItem(FIRST_HAT_SLOT, replaceItemStack(playerPoint, 1, instance.hatItem.getItemStack()));
+                        inventory.setItem(FIRST_HAT_SLOT, replaceItemStack(playerPoint, 1, instance.hatItems.get(index).getItemStack()));
                         inventory.setItem(FIRST_PLAYER_SLOT, replaceItemStack(playerPoint, 1, instance.playerItem.getItemStack()));
                     }
                     case 1 -> {
-                        inventory.setItem(SECOND_HAT_SLOT, replaceItemStack(playerPoint, 2, instance.hatItem.getItemStack()));
+                        inventory.setItem(SECOND_HAT_SLOT, replaceItemStack(playerPoint, 2, instance.hatItems.get(index).getItemStack()));
                         inventory.setItem(SECOND_PLAYER_SLOT, replaceItemStack(playerPoint, 2, instance.playerItem.getItemStack()));
                     }
                     case 2 -> {
-                        inventory.setItem(THIRD_HAT_SLOT, replaceItemStack(playerPoint, 3, instance.hatItem.getItemStack()));
+                        inventory.setItem(THIRD_HAT_SLOT, replaceItemStack(playerPoint, 3, instance.hatItems.get(index).getItemStack()));
                         inventory.setItem(THIRD_PLAYER_SLOT, replaceItemStack(playerPoint, 3, instance.playerItem.getItemStack()));
                     }
                 }

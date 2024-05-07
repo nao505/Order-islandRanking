@@ -1,18 +1,36 @@
 {
   "title": "<rank_type> 랭킹",
-
   "colorFirst": "&a",
   "colorSecond": "&6",
   "colorThird": "&e",
-
   "hatItem": {
-    "type": "stone",
-    "displayName": " ",
-    "lore": [
-      "로어"
-    ],
-    "amount": 1,
-    "customModelData": 0
+    "0": {
+      "type": "stone",
+      "displayName": " ",
+      "lore": [
+        "로어"
+      ],
+      "amount": 1,
+      "customModelData": 0
+    },
+    "1": {
+      "type": "stone",
+      "displayName": " ",
+      "lore": [
+        "로어"
+      ],
+      "amount": 1,
+      "customModelData": 0
+    },
+    "2": {
+      "type": "stone",
+      "displayName": " ",
+      "lore": [
+        "로어"
+      ],
+      "amount": 1,
+      "customModelData": 0
+    }
   },
 
   "playerItem": {
