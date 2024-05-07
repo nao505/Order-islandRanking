@@ -6,6 +6,7 @@ import com.binggre.ap_ranking.ApRanking;
 import com.binggre.ap_ranking.objects.Day;
 import com.binggre.ap_ranking.objects.RankType;
 import com.binggre.binggreapi.utils.ColorManager;
+import com.binggre.binggreapi.utils.NumberUtil;
 import com.binggre.binggreapi.utils.file.FileManager;
 import com.racoboss.Class.playerPointClass;
 
@@ -56,8 +57,8 @@ public class ApRankingConfig {
                 .replace("<island>", islandName);
 
         return switch (rankType) {
-            case DAILY -> replaced.replace("<point>", pointClass.getPoint_daily() + "");
-            case WEEKLY -> replaced.replace("<point>", pointClass.getPoint_accumulated() + "");
+            case DAILY -> replaced.replace("<point>", NumberUtil.applyComma(pointClass.getPoint_daily()));
+            case WEEKLY -> replaced.replace("<point>", NumberUtil.applyComma(pointClass.getPoint_accumulated()));
         };
     }
 
