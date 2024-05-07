@@ -1,6 +1,5 @@
 package com.binggre.ap_ranking.schedulers;
 
-import com.binggre.ap_ranking.ApRanking;
 import com.binggre.ap_ranking.config.ApRankingConfig;
 import com.binggre.ap_ranking.objects.RankType;
 import com.binggre.ap_ranking.utils.RankingFinder;
@@ -19,7 +18,6 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.function.BiConsumer;
 
 public class RankingUpdateScheduler extends SchedulerService {
 
@@ -41,6 +39,7 @@ public class RankingUpdateScheduler extends SchedulerService {
         List<playerPointClass> rankings = RankingFinder.findRanking(rankType);
         String hologramId = config.getHologramId(rankType);
         Hologram hologram = Hologram.getCachedHologram(hologramId);
+
         if (hologram == null) {
             return;
         }
