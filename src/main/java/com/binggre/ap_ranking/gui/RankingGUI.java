@@ -134,7 +134,9 @@ public class RankingGUI {
             }
             int rank = RankingFinder.findRanking(player, type);
             playerPointClass playerPoint = PlayerPointFinder.get(player.getUniqueId());
-            inventory.setItem(MY_SLOT, replaceItemStack(playerPoint, rank, instance.playerItem.getItemStack()));
+            if (playerPoint != null) {
+                inventory.setItem(MY_SLOT, replaceItemStack(playerPoint, rank, instance.playerItem.getItemStack()));
+            }
         }
 
         private ItemStack replaceItemStack(playerPointClass playerPoint, int rank, ItemStack itemStack) {
