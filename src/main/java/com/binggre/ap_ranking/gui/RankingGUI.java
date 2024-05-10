@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.binggre.binggreapi.utils.NumberUtil.applyComma;
+
 public class RankingGUI {
 
     private static final int SIZE = 4 * 9;
@@ -156,8 +158,8 @@ public class RankingGUI {
             String rankColor = getRankColor(rank) + rank;
             ItemManager.replaceDisplayName(itemStack, "<nickname>", nickname);
             ItemManager.replaceDisplayName(itemStack, "<rank>", rankColor);
-            ItemManager.replaceLore(itemStack, "<daily_point>", playerPoint.getPoint_daily() + "");
-            ItemManager.replaceLore(itemStack, "<weekly_point>", playerPoint.getPoint_accumulated() + "");
+            ItemManager.replaceLore(itemStack, "<daily_point>", applyComma(playerPoint.getPoint_daily()));
+            ItemManager.replaceLore(itemStack, "<weekly_point>", applyComma(playerPoint.getPoint_accumulated()));
             ItemManager.replaceLore(itemStack, "<rank>", rankColor);
 
             return ItemManager.replaceLore(itemStack, "<nickname>", nickname);
