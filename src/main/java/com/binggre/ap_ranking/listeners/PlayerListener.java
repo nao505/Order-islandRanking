@@ -19,8 +19,11 @@ public class PlayerListener implements Listener {
             return;
         }
         Bukkit.getScheduler().runTaskLater(ApRanking.getPlugin(), () -> {
+            if (!player.isOnline()) {
+                return;
+            }
             if (!offlinePlayerReward.receive()) {
-                player.sendMessage("§c인벤토리 공간이 부족하여 랭킹 보상을 받을 수 없습니다.\n&c공간을 확보 후 다시 접속해 주세요.");
+                player.sendMessage("§c인벤토리 공간이 부족하여 랭킹 보상을 받을 수 없습니다.\n§c공간을 확보 후 다시 접속해 주세요.");
             }
         }, 60L);
     }

@@ -7,6 +7,7 @@ import com.binggre.ap_ranking.gui.RankingGUI;
 import com.binggre.ap_ranking.gui.RankingSelectGUI;
 import com.binggre.ap_ranking.listeners.DailyResetListener;
 import com.binggre.ap_ranking.listeners.InventoryListener;
+import com.binggre.ap_ranking.listeners.PlayerListener;
 import com.binggre.ap_ranking.listeners.RewardInventoryListener;
 import com.binggre.ap_ranking.objects.OfflinePlayerRewardHolder;
 import com.binggre.ap_ranking.objects.RankingRewardHolder;
@@ -40,7 +41,8 @@ public final class ApRanking extends BinggrePlugin {
         super.registerEvents(this,
                 new RewardInventoryListener(),
                 new InventoryListener(),
-                new DailyResetListener()
+                new DailyResetListener(),
+                new PlayerListener()
         );
         ApRankingConfig.getInst().load();
         RankingSelectGUI.getInst().load();
