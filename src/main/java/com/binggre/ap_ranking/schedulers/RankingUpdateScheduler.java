@@ -64,6 +64,9 @@ public class RankingUpdateScheduler extends SchedulerService {
 
     private void setRankerPlayer(RankType rankType, Map<Integer, Integer> rankId) {
         List<playerPointClass> rankings = RankingFinder.findRanking(rankType);
+        if (rankings.isEmpty()) {
+            return;
+        }
         rankId.forEach((rank, id) -> {
             if (id == -1) {
                 return;
