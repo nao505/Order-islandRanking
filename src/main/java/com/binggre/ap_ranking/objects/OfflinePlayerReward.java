@@ -39,6 +39,7 @@ public class OfflinePlayerReward {
             return false;
         }
         list.forEach(itemStack -> player.getInventory().addItem(itemStack));
+        getHolder().remove(uuid);
         getFile().delete();
         return true;
     }
